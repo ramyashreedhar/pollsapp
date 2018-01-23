@@ -1,0 +1,78 @@
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  {% load static %}
+    <style>
+ .divstyle{
+  border: 1px solid powderblue;
+  background:#D3D3D3;
+ background-image:url({% static 'polls1/b1.jpg' %});
+
+}
+ .btn-lg-round {
+	border-radius: 10px;
+}
+
+ </style>
+</head>
+
+<body class="divstyle" >
+  <nav class="navbar navbar-expand-lg  navbar navbar-dark bg-primary">
+  <a class="navbar-brand" href="{% url 'polls1:index' %}">Ramya's Polls</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav  mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'polls1:index' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'polls1:about' %}">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://www.goodreads.com/">GoodReads</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Favorites
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="https://gaana.com/">Music</a>
+          <a class="dropdown-item" href="https://www.readanybook.com/genre/thriller-4">Horror Novels</a>
+          <a class="dropdown-item" href="https://pizzaonline.dominos.co.in/">Pizza</a>
+        </div>
+      </li>
+    </ul>
+      <ul class="nav navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link btn btn-link" href="{% url 'news'%}">NewsLetter SignUp</a>
+                </li>
+            </ul>
+  </div>
+</nav>
+<div class="container "   >
+    <div class="jumbotron" style="background:#ff9999;">
+<h1>{{ question.question_text }}</h1>
+<br />
+
+{% if error_message %}<p style="color:red;"><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'polls1:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+    <input  type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+    <label  for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+{% endfor %}
+
+<br />
+<input class="btn btn-success btn-lg btn-lg-round" type="submit" value="Vote!!" />
+    <button type="button" class="btn btn-link btn-lg btn-lg-round"> <a  class="btn btn-link btn-lg btn-lg-round btn btn-dark" role="button"  href="{% url 'polls1:index' %}">Back to Questions</a></button>
+
+</form>
+</div>
+</div>
+</body>

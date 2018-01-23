@@ -1,0 +1,121 @@
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<title>Ramya's Polls!!</title>
+   {% load static %}
+<style>
+.divstyle{
+  border: 1px solid powderblue;
+  background:#D3D3D3;
+ background-image:url({% static 'polls1/b1.jpg' %});
+ b
+}
+
+</style>
+</head>
+
+<body class="divstyle" >
+  <!--<nav class="navbar navbar-expand-lg  navbar navbar-dark bg-primary">
+      <a class="navbar-brand" href="{% url 'polls1:index' %}">Ramya's Polls</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav mr-auto">
+
+             <a class="nav-item nav-link" href="{% url 'polls1:about' %}">About</a>
+            <a class="nav-item nav-link" href="https://www.goodreads.com/">GoodReads</a>
+
+              <div class="btn-group">
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Favorites
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="https://gaana.com/">Music</a>
+    <a class="dropdown-item" href='https://www.readanybook.com/genre/thriller-4'>Horror Novels</a>
+    <a class="dropdown-item" href="https://pizzaonline.dominos.co.in/">Pizza</a>
+
+  </div>
+</div>
+              <div class="collapse navbar-collapse " id="navbarCollapse">
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+              <a class=" nav-link" href="{% url 'news'%}">NewsLetter SignUp</a>
+                    </li></ul>
+              </div>
+
+
+
+          </div>
+      </div>
+    </nav>-->
+  <nav class="navbar navbar-expand-lg  navbar navbar-dark bg-primary">
+  <a class="navbar-brand" href="{% url 'polls1:index' %}">Ramya's Polls</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav  mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'polls1:index' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'polls1:about' %}">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://www.goodreads.com/">GoodReads</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Favorites
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="https://gaana.com/">Music</a>
+          <a class="dropdown-item" href="https://www.readanybook.com/genre/thriller-4">Horror Novels</a>
+          <a class="dropdown-item" href="https://pizzaonline.dominos.co.in/">Pizza</a>
+        </div>
+      </li>
+    </ul>
+      <ul class="nav navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link btn btn-link" href="{% url 'news'%}">NewsLetter SignUp</a>
+                </li>
+            </ul>
+  </div>
+</nav>
+
+
+<h1 style="color:blue;text-align:center;">Welcome to Ramya's Polls !!</h1>
+<div class="container">
+
+<br />
+{% load static %}
+        <img src="{% static 'polls1/poll3.jpg' %}"  class="img-responsive  rounded mx-auto d-block " style="height:300px;width:350px;"/>
+<br />
+<div class="jumbotron" style="background:#ff9999;">
+ <h2>Choose a Question from the list :</h2>
+   <br />
+ {% load static %}
+ <img src="{% static 'polls1/thumbsup.jpg'%}" class="img-responsive"  style="height:55px;" />
+<br />
+<br />
+
+{% if latest_question_list %}
+    <div class="list-group">
+    {% for question in latest_question_list%}
+    <a  class="list-group-item list-group-item-action" href="{% url 'polls1:detail' question.id %}">{{ question.question_text }}</a>
+        <br />
+    {% endfor %}
+  </div>
+
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+</div>
+    </div>
+
+
+</body>
